@@ -1,0 +1,12 @@
+body{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: auto;
+    height: auto;
+    background-image: url(../images/14A_2863.jpg);
+    background-size: cover;
+    z-index: 0;
+}

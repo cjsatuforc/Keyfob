@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <title>IVC Key and Electronic Fob</title>
+        
+        <!-- homer-1.4 Vendor styles -->
+        <link rel="stylesheet" href="../homer-1.4/vendor/fontawesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="../homer-1.4/vendor/metisMenu/dist/metisMenu.css"/>
+        <link rel="stylesheet" href="../homer-1.4/vendor/animate.css/animate.css"/>
+        <link rel="stylesheet" href="../homer-1.4/vendor/bootstrap/dist/css/bootstrap.css"/>
+        <!-- homer-1.4 App styles -->
+        <link rel="stylesheet" href="../homer-1.4/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
+        <link rel="stylesheet" href="../homer-1.4/fonts/pe-icon-7-stroke/css/helper.css"/>
+        <link rel="stylesheet" href="../homer-1.4/styles/style.css"/>
+    </head>
+    <body>
+        <!-- Header -->
+        <div id="header">
+            <div class="color-line"></div>
+            <div id="logo" class="light-version">
+                <span id="login_user"></span>
+            </div>
+            <nav role="navigation">
+                <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+            </nav>
+        </div>
+        
+        <!-- Navigation -->
+        <aside id="menu">
+            <ul class="nav" id="side-menu">
+                <li class="active">
+                    <a href="home.html"><span class="nav-label">Key/Fob Request</span></a>
+                </li>
+                <li>
+                    <a href=# id="nav_logout"><span class="nav-label">Logout</span><span class="pull-right"><i class="fa fa-hand-o-right"></i></span></a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Main Wrapper -->
+        <div id="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hpanel">
+                        <div class="panel-body">
+                            <h3 class="text-center" style="padding-bottom: 15px;">IVC Key and Electronic Fob Request Form</h3>
+                            <form method="get" class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Date:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" disabled id="cur_date"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Requestor:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" disabled id="requestor"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Title:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" id="title"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Phone:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" id="phone"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Department:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" id="department"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Manager:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" id="manager"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4" style="padding-top: 5px;"><b>Key(s) or Fob(s) requested for the following location:</b></div>
+                                            <div class="col-lg-8"><button type="button" class="btn btn-outline btn-primary" id="btn_add">Add More</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12" id="request_list">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Building:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" id="building_0"></div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Room #:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" id="room_0"></div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Key #:</label>
+                                            <div class="col-lg-11"><input type="text" class="form-control" id="key_0"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" class="i-checks" id="reason">&nbsp;&nbsp;<b>This request is to replace keys that were LOST/MISPLACED/STOLEN.</b></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <label class="col-lg-1" style="padding-top: 5px;">Justification:</label>
+                                            <div class="col-lg-11"><textarea class="form-control" style="height: 50px; resize: vertical;" id="justification"></textarea></div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-lg-1"><button type="button" class="btn w-lg btn-primary" id="btn_submit">Submit</button></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- homer-1.4 Vendor javascript -->
+        <script src="../homer-1.4/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="../homer-1.4/vendor/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../homer-1.4/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="../homer-1.4/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../homer-1.4/vendor/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../homer-1.4/vendor/iCheck/icheck.min.js"></script>
+        <script src="../homer-1.4/vendor/sparkline/index.js"></script>
+        <!-- include javascript -->
+        <script src="../include/js/jquery.autosize.js"></script>
+        <!-- application javascript -->
+        <script type="text/javascript" src="js/home.js"></script>
+        <script type="text/javascript" src="js/session_data.js"></script>
+        <script type="text/javascript" src="js/db_access.js"></script>
+    </body>
+</html>
