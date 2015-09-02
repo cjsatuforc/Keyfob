@@ -7,15 +7,15 @@
         
         <title>IVC Key and Electronic Fob</title>
         
-        <!-- homer-1.4 Vendor styles -->
-        <link rel="stylesheet" href="../homer-1.4/vendor/fontawesome/css/font-awesome.css"/>
-        <link rel="stylesheet" href="../homer-1.4/vendor/metisMenu/dist/metisMenu.css"/>
-        <link rel="stylesheet" href="../homer-1.4/vendor/animate.css/animate.css"/>
-        <link rel="stylesheet" href="../homer-1.4/vendor/bootstrap/dist/css/bootstrap.css"/>
-        <!-- homer-1.4 App styles -->
-        <link rel="stylesheet" href="../homer-1.4/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
-        <link rel="stylesheet" href="../homer-1.4/fonts/pe-icon-7-stroke/css/helper.css"/>
-        <link rel="stylesheet" href="../homer-1.4/styles/style.css"/>
+        <!-- homer-1.5 Vendor styles -->
+        <link rel="stylesheet" href="../homer-1.5/vendor/fontawesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="../homer-1.5/vendor/metisMenu/dist/metisMenu.css"/>
+        <link rel="stylesheet" href="../homer-1.5/vendor/animate.css/animate.css"/>
+        <link rel="stylesheet" href="../homer-1.5/vendor/bootstrap/dist/css/bootstrap.css"/>
+        <!-- homer-1.5 App styles -->
+        <link rel="stylesheet" href="../homer-1.5/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
+        <link rel="stylesheet" href="../homer-1.5/fonts/pe-icon-7-stroke/css/helper.css"/>
+        <link rel="stylesheet" href="../homer-1.5/styles/style.css"/>
         <!-- application styles -->
         <link rel="stylesheet" href="css/login.css"/>
     </head>
@@ -50,16 +50,16 @@
             </div>
         </div>
         
-        <!-- homer-1.4 Vendor javascript -->
-        <script src="../homer-1.4/vendor/jquery/dist/jquery.min.js"></script>
-        <script src="../homer-1.4/vendor/jquery-ui/jquery-ui.min.js"></script>
-        <script src="../homer-1.4/vendor/slimScroll/jquery.slimscroll.min.js"></script>
-        <script src="../homer-1.4/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="../homer-1.4/vendor/metisMenu/dist/metisMenu.min.js"></script>
-        <script src="../homer-1.4/vendor/iCheck/icheck.min.js"></script>
-        <script src="../homer-1.4/vendor/sparkline/index.js"></script>
+        <!-- homer-1.5 Vendor javascript -->
+        <script src="../homer-1.5/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="../homer-1.5/vendor/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../homer-1.5/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="../homer-1.5/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../homer-1.5/vendor/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../homer-1.5/vendor/iCheck/icheck.min.js"></script>
+        <script src="../homer-1.5/vendor/sparkline/index.js"></script>
         <!-- include javascript -->
-        <script src="../include/js/bowser.min.js"></script>
+        <script src="../include/bowser/bowser.min.js"></script>
         <!-- application javascript -->
         <script type="text/javascript" src="js/Login.js"></script>
         <script type="text/javascript" src="js/session_data.js"></script>
