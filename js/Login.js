@@ -27,28 +27,14 @@ window.onload = function() {
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-$(document).ready(function() {  
-    // enter key to login
-    $('#password').keypress(function (e) {
-        if(e.keyCode === 13){
-            $('#btn_login').click();
-        }
-    });
-    
+$(document).ready(function() {      
     $('#btn_login').click(function() { 
-        var url_param = sessionStorage.getItem('ss_dsps_url_param');
-        if(loginInfo()) {
-            $('#error_msg').html("");
-            $('#logn_error').hide();
-            
-            if (url_param === null) {
-                window.open('home.html', '_self');
-                return false;
-            }
-            else {
-                window.open(url_param, '_self');
-                return false;
-            }
+        $('#error_msg').html("");
+        $('#logn_error').hide();
+        
+        if(loginInfo()) {            
+            window.open('home.html', '_self');
+            return false;
         }
         else {
             $('#error_msg').html("Invalid username or password");
@@ -60,7 +46,7 @@ $(document).ready(function() {
 ////////////////////////////////////////////////////////////////////////////////
 function loginInfo() {   
     var result = new Array();
-    var username = $('#username').val();
+    var username = $('#username').val().toLowerCase().replace("@ivc.edu", "");
     var password = $('#password').val();
     
     result = getLoginUserInfo("php/login.php", username, password);    
@@ -69,19 +55,25 @@ function loginInfo() {
     }
     else {
         var display_name = result[0];
-        var email = result[1];
-        var phone = result[2];
-        var title = result[3];
-        var department = result[4];
-        var manager = result[5];
-        var mgr_email = result[6];
+        var login_email = result[1];
+        var login_title = result[2];
+        var login_depart = result[3];
+        var login_phone = result[4];
+        var emp_num = result[5];
+        var emp_type = result[6];
         
-        if (email === null || typeof email === 'undefined') {
-            alert("Login error: There was an error getting login user information from Active Direcy please try again");
+        var manager = result[7];
+        var mgr_email = result[8];
+        var mgr_title = result[9];
+        var mgr_depart = result[10];
+        var mgr_phone = result[11];
+        
+        if (mgr_email === null || typeof mgr_email === 'undefined') {
+            alert("Login error: Your manager is not set up in Active Direcy, please contact 949.451.5254 or email to ivctech@ivc.edu");
             return false;
         }
 
-        localData_login(display_name, email, phone, title, department, manager, mgr_email);
+        localData_login(display_name, login_email, login_title, login_depart, login_phone, emp_num, emp_type, manager, mgr_email, mgr_title, mgr_depart, mgr_phone);
         return true;
     }
 }

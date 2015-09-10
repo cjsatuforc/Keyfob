@@ -1,16 +1,21 @@
 ////////////////////////////////////////////////////////////////////////////////
-function localData_login(DisplayName, loginEmail, loginPhone, title, department, manager, mgr_email) {
+function localData_login(display_name, login_email, login_title, login_depart, login_phone, emp_num, emp_type, manager, mgr_email, mgr_title, mgr_depart, mgr_phone) {
     var cur_date_time = new Date();
     cur_date_time.setHours(cur_date_time.getHours() + 2);
     sessionStorage.setItem('ss_keyfob_expiration_date_time', cur_date_time);
     
-    sessionStorage.setItem('ss_keyfob_loginName', objToString(DisplayName));
-    sessionStorage.setItem('ss_keyfob_loginEmail', objToString(loginEmail));
-    sessionStorage.setItem('ss_keyfob_loginPhone', objToString(loginPhone));
-    sessionStorage.setItem('ss_keyfob_title', objToString(title));
-    sessionStorage.setItem('ss_keyfob_department', objToString(department));
+    sessionStorage.setItem('ss_keyfob_display_name', objToString(display_name));
+    sessionStorage.setItem('ss_keyfob_login_email', objToString(login_email));
+    sessionStorage.setItem('ss_keyfob_login_title', objToString(login_title));
+    sessionStorage.setItem('ss_keyfob_login_depart', objToString(login_depart));
+    sessionStorage.setItem('ss_keyfob_login_phone', objToString(login_phone));
+    sessionStorage.setItem('ss_keyfob_emp_num', objToString(emp_num));
+    sessionStorage.setItem('ss_keyfob_emp_type', objToString(emp_type));
     sessionStorage.setItem('ss_keyfob_manager', objToString(manager));
     sessionStorage.setItem('ss_keyfob_mgr_email', objToString(mgr_email));
+    sessionStorage.setItem('ss_keyfob_mgr_title', objToString(mgr_title));
+    sessionStorage.setItem('ss_keyfob_mgr_depart', objToString(mgr_depart));
+    sessionStorage.setItem('ss_keyfob_mgr_phone', objToString(mgr_phone));
 }
 
 function IsLoginExpired() {
