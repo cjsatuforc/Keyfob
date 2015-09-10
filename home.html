@@ -7,15 +7,52 @@
         
         <title>IVC Key and Electronic Fob</title>
         
-        <!-- homer-1.4 Vendor styles -->
-        <link rel="stylesheet" href="../homer-1.4/vendor/fontawesome/css/font-awesome.css"/>
-        <link rel="stylesheet" href="../homer-1.4/vendor/metisMenu/dist/metisMenu.css"/>
-        <link rel="stylesheet" href="../homer-1.4/vendor/animate.css/animate.css"/>
-        <link rel="stylesheet" href="../homer-1.4/vendor/bootstrap/dist/css/bootstrap.css"/>
-        <!-- homer-1.4 App styles -->
-        <link rel="stylesheet" href="../homer-1.4/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
-        <link rel="stylesheet" href="../homer-1.4/fonts/pe-icon-7-stroke/css/helper.css"/>
-        <link rel="stylesheet" href="../homer-1.4/styles/style.css"/>
+        <!-- homer-1.5 Vendor styles -->
+        <link rel="stylesheet" href="../homer-1.5/vendor/fontawesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="../homer-1.5/vendor/metisMenu/dist/metisMenu.css"/>
+        <link rel="stylesheet" href="../homer-1.5/vendor/animate.css/animate.css"/>
+        <link rel="stylesheet" href="../homer-1.5/vendor/bootstrap/dist/css/bootstrap.css"/>
+        <!-- homer-1.5 App styles -->
+        <link rel="stylesheet" href="../homer-1.5/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"/>
+        <link rel="stylesheet" href="../homer-1.5/fonts/pe-icon-7-stroke/css/helper.css"/>
+        <link rel="stylesheet" href="../homer-1.5/styles/style.css"/>
+        <script type="text/javascript">
+        <!--
+        function addTR() {
+            var lo_table = document.getElementById("TblAttach1");
+            var row_index = lo_table.rows.length;      // 테이블(TR) row 개수
+            if (row_index>8){
+                //alert('You can add only 8 lines.          ');
+                return;
+            }
+            newTr = lo_table.insertRow(row_index);
+            newTr.idName = "newTr" + row_index;
+
+            newTd=newTr.insertCell(0);
+            //newTd.align = "center";
+            newTd.height = "30px;";
+            newTd.innerHTML = row_index;    //"Line#"+row_index;
+
+            newTd=newTr.insertCell(1);  //Building
+            //newTd.align = "center";
+            newTd.innerHTML= "<select name='' class='js-source-states' style='padding-right:15px;'><option value=''>BSTIC</option><option value=''>PAC</option><option value=''>SSC</option><option value=''>A100</option><option value=''>A200</option><option value=''>A300</option><option value=''>A400</option></select>";
+
+            newTd=newTr.insertCell(2);  //Room#
+            //newTd.align = "center";
+            newTd.innerHTML= "<select name='' class='js-source-states' style='padding-right:15px;'><option value=''>101</option><option value=''>102</option><option value=''>103</option><option value=''>104</option><option value=''>105</option><option value=''>A01</option><option value=''>A02</option><option value=''>A03</option><option value=''>B01</option><option value=''>B02</option></select>";
+
+            newTd=newTr.insertCell(3);  //Key#
+            //newTd.align = "center";
+            newTd.innerHTML= "<input id='key_num' style='width:170px; height:22px;' placeholder='Key#'>";
+        }
+
+        function delTR(){
+            var lo_table = document.getElementById("TblAttach1");
+            var row_index = lo_table.rows.length-1;		//테이블(TR) row 개수
+            if(row_index > 1) lo_table.deleteRow(row_index);	//삭제할 때 최소 한 줄은 남겨 놓도록 한다.
+        }
+        //-->
+        </script>
     </head>
     <body>
         <!-- Header -->
@@ -53,7 +90,7 @@
                                     <div class="col-lg-12">
                                         <div class="row">
                                             <label class="col-lg-1" style="padding-top: 5px;">Date:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" disabled id="cur_date"></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" readonly id="cur_date"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +98,14 @@
                                     <div class="col-lg-12">
                                         <div class="row">
                                             <label class="col-lg-1" style="padding-top: 5px;">Requestor:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" disabled id="requestor"></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" readonly id="requestor"></div>
+                                            <label class="col-lg-1" style="padding-top: 5px;">Faculty:</label>
+                                            <div class="col-lg-4">
+                                                <div class="radio">
+                                                    <label> <input type="checkbox" class="i-checks" name="" value="" id=""> Full Time </label>
+                                                    <label> <input type="checkbox" class="i-checks" name="" value="" id=""> Part Time </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,15 +113,9 @@
                                     <div class="col-lg-12">
                                         <div class="row">
                                             <label class="col-lg-1" style="padding-top: 5px;">Title:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" id="title"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <div class="row">
+                                            <div class="col-lg-4"><input type="text" class="form-control" readonly id="title"></div>
                                             <label class="col-lg-1" style="padding-top: 5px;">Phone:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" id="phone"></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="phone"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,44 +123,72 @@
                                     <div class="col-lg-12">
                                         <div class="row">
                                             <label class="col-lg-1" style="padding-top: 5px;">Department:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" id="department"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <div class="row">
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="department"></div>
                                             <label class="col-lg-1" style="padding-top: 5px;">Manager:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" id="manager"></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" readonly id="manager"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
-                                        <div class="row">
-                                            <div class="col-lg-4" style="padding-top: 5px;"><b>Key(s) or Fob(s) requested for the following location:</b></div>
-                                            <div class="col-lg-8"><button type="button" class="btn btn-outline btn-primary" id="btn_add">Add More</button></div>
+                                        <div class="hpanel">
+                                            <div class="panel-heading">
+                                                <b>Key(s) or Fob(s) requested for the following location:</b>&nbsp;
+                                                <input type="button" value="Add a Line" onclick="addTR();">&nbsp;
+                                                <input type="button" value="Remove" onclick="delTR();">
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="table-responsive">
+                                                <table border="0" cellpadding="1" cellspacing="1" class="table" id="TblAttach1">
+                                                    <thead>
+                                                    <tr>
+                                                        <th align="center">#</th>
+                                                        <th align="center">Building</th>
+                                                        <th align="center">Room#</th>
+                                                        <th align="center">Key#</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>                                                        
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <select name="" class="js-source-states" style="padding-right:15px;">
+                                                                <option value="">BSTIC</option>
+                                                                <option value="">PAC</option>
+                                                                <option value="">SSC</option>
+                                                                <option value="">A100</option>
+                                                                <option value="">A200</option>
+                                                                <option value="">A300</option>
+                                                                <option value="">A400</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="" class="js-source-states" style="padding-right:15px;">
+                                                                <option value="">101</option>
+                                                                <option value="">102</option>
+                                                                <option value="">103</option>
+                                                                <option value="">104</option>
+                                                                <option value="">105</option>
+                                                                <option value="">A01</option>
+                                                                <option value="">A02</option>
+                                                                <option value="">A03</option>
+                                                                <option value="">B01</option>
+                                                                <option value="">B02</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input id="key_num" style="width:170px; height:22px;" placeholder="Key#">
+                                                            <!--<div class="col-lg-5"><input type="text" class="form-control" id="key_num"></div>-->
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12" id="request_list">
-                                        <div class="row">
-                                            <label class="col-lg-1" style="padding-top: 5px;">Building:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" id="building_0"></div>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-lg-1" style="padding-top: 5px;">Room #:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" id="room_0"></div>
-                                        </div>
-                                        <div class="row">
-                                            <label class="col-lg-1" style="padding-top: 5px;">Key #:</label>
-                                            <div class="col-lg-11"><input type="text" class="form-control" id="key_0"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <div class="row">
@@ -134,9 +200,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
-                                        <div class="row">
-                                            <label class="col-lg-1" style="padding-top: 5px;">Justification:</label>
-                                            <div class="col-lg-11"><textarea class="form-control" style="height: 50px; resize: vertical;" id="justification"></textarea></div>
+                                        <div class="row" style="padding-top:15px;">
+                                            <label class="col-lg-1" style="padding-top:5px;">Justification:</label>
+                                            <div class="col-lg-11"><textarea class="form-control" style="height: 60px; resize: vertical;" id="justification"></textarea></div>
                                         </div>
                                     </div>
                                 </div> 
@@ -151,14 +217,14 @@
             </div>
         </div>
         
-        <!-- homer-1.4 Vendor javascript -->
-        <script src="../homer-1.4/vendor/jquery/dist/jquery.min.js"></script>
-        <script src="../homer-1.4/vendor/jquery-ui/jquery-ui.min.js"></script>
-        <script src="../homer-1.4/vendor/slimScroll/jquery.slimscroll.min.js"></script>
-        <script src="../homer-1.4/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="../homer-1.4/vendor/metisMenu/dist/metisMenu.min.js"></script>
-        <script src="../homer-1.4/vendor/iCheck/icheck.min.js"></script>
-        <script src="../homer-1.4/vendor/sparkline/index.js"></script>
+        <!-- homer-1.5 Vendor javascript -->
+        <script src="../homer-1.5/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="../homer-1.5/vendor/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../homer-1.5/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="../homer-1.5/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../homer-1.5/vendor/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../homer-1.5/vendor/iCheck/icheck.min.js"></script>
+        <script src="../homer-1.5/vendor/sparkline/index.js"></script>
         <!-- include javascript -->
         <script src="../include/js/jquery.autosize.js"></script>
         <!-- application javascript -->
