@@ -26,7 +26,6 @@ function db_getBuildingList() {
     $.ajax({
         type:"POST",
         url:"php/db_getBuildingList.php",
-        data:{AdminEmail:AdminEmail},
         async: false,  
         success:function(data) {
             result = JSON.parse(data);

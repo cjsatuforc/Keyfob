@@ -1,6 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 window.onload = function() {
-    if (sessionStorage.key(0) !== null) { 
+    if (sessionStorage.key(0) !== null) {     
+        // testing...
+        var result = new Array();
+        result = db_getBuildingList();
+        
         getLoginUser();
     }
     else {
