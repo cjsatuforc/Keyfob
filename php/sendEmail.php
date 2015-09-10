@@ -1,5 +1,5 @@
 <?php
-    require("class.phpmailer.php");
+    require("PHPMailerAutoload.php");
 
     $Email = filter_input(INPUT_POST, 'Email');
     $Name = filter_input(INPUT_POST, 'Name');
