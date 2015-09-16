@@ -90,6 +90,62 @@ function db_getManagerID(MgrEmail) {
     return result;
 }
 
+function db_getKeyfob(KeyfobID) {
+    var result = new Array();
+    $.ajax({
+        type:"POST",
+        url:"php/db_getKeyfob.php",
+        data:{KeyfobID:KeyfobID},
+        async: false,  
+        success:function(data) {
+            result = JSON.parse(data);
+        }
+    });
+    return result;
+}
+
+function db_getKeyfobUserActiveList(UserID) {
+    var result = new Array();
+    $.ajax({
+        type:"POST",
+        url:"php/db_getKeyfobUserActiveList.php",
+        data:{UserID:UserID},
+        async: false,  
+        success:function(data) {
+            result = JSON.parse(data);
+        }
+    });
+    return result;
+}
+
+function db_getKeyfobUserCompleteList(UserID) {
+    var result = new Array();
+    $.ajax({
+        type:"POST",
+        url:"php/db_getKeyfobUserCompleteList.php",
+        data:{UserID:UserID},
+        async: false,  
+        success:function(data) {
+            result = JSON.parse(data);
+        }
+    });
+    return result;
+}
+
+function db_getLocationList(KeyfobID) {
+    var result = new Array();
+    $.ajax({
+        type:"POST",
+        url:"php/db_getLocationList.php",
+        data:{KeyfobID:KeyfobID},
+        async: false,  
+        success:function(data) {
+            result = JSON.parse(data);
+        }
+    });
+    return result;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
