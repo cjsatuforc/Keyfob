@@ -48,24 +48,107 @@ function db_getRoomListByBuildingID(BuildingID) {
     return result;
 }
 
+function db_getETypeID(EType) {
+    var result;
+    $.ajax({
+        type:"POST",
+        url:"php/db_getETypeID.php",
+        data:{EType:EType},
+        async: false,  
+        success:function(data) {
+            result = JSON.parse(data);
+        }
+    });
+    return result;
+}
+
+function db_getUserID(UserEmail) {
+    var result;
+    $.ajax({
+        type:"POST",
+        url:"php/db_getUserID.php",
+        data:{UserEmail:UserEmail},
+        async: false,  
+        success:function(data) {
+            result = JSON.parse(data);
+        }
+    });
+    return result;
+}
+
+function db_getManagerID(MgrEmail) {
+    var result;
+    $.ajax({
+        type:"POST",
+        url:"php/db_getManagerID.php",
+        data:{MgrEmail:MgrEmail},
+        async: false,  
+        success:function(data) {
+            result = JSON.parse(data);
+        }
+    });
+    return result;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // insert DB ///////////////////////////////////////////////////////////////////
-//function db_insertProctor(StuName, StuEmail, StuID, InstName, InstEmail, CourseID, SectionNum, TestDate, TestTime, Comments) {
-//    var ResultID = "";
-//    $.ajax({
-//        type:"POST",
-//        url:"php/db_insertProctor.php",
-//        data:{StuName:StuName, StuEmail:StuEmail, StuID:StuID, InstName:InstName, InstEmail:InstEmail, CourseID:CourseID, 
-//                SectionNum:SectionNum, TestDate:TestDate, TestTime:TestTime, Comments:Comments},
-//        async: false,  
-//        success:function(data) {
-//            ResultID = JSON.parse(data);
-//        }
-//    });
-//    return ResultID;
-//}
+function db_insertUser(EmployeeID, ETypeID, UserName, UserEmail, UserTitle, Phone, Department) {
+    var ResultID = "";
+    $.ajax({
+        type:"POST",
+        url:"php/db_insertUser.php",
+        data:{EmployeeID:EmployeeID, ETypeID:ETypeID, UserName:UserName, UserEmail:UserEmail, UserTitle:UserTitle, Phone:Phone, Department:Department},
+        async: false,  
+        success:function(data) {
+            ResultID = JSON.parse(data);
+        }
+    });
+    return ResultID;
+}
+
+function db_insertManager(MgrName, MgrEmail, MgrTitle, MgrPhone, Department) {
+    var ResultID = "";
+    $.ajax({
+        type:"POST",
+        url:"php/db_insertManager.php",
+        data:{MgrName:MgrName, MgrEmail:MgrEmail, MgrTitle:MgrTitle, MgrPhone:MgrPhone, Department:Department},
+        async: false,  
+        success:function(data) {
+            ResultID = JSON.parse(data);
+        }
+    });
+    return ResultID;
+}
+
+function db_insertKeyfob(UserID, ManagerID, Justification, Replace) {
+    var ResultID = "";
+    $.ajax({
+        type:"POST",
+        url:"php/db_insertKeyfob.php",
+        data:{UserID:UserID, ManagerID:ManagerID, Justification:Justification, Replace:Replace},
+        async: false,  
+        success:function(data) {
+            ResultID = JSON.parse(data);
+        }
+    });
+    return ResultID;
+}
+
+function db_insertLocation(KeyfobID, BuildingID, RoomID, KeyNum) {
+    var ResultID = "";
+    $.ajax({
+        type:"POST",
+        url:"php/db_insertLocation.php",
+        data:{KeyfobID:KeyfobID, BuildingID:BuildingID, RoomID:RoomID, KeyNum:KeyNum},
+        async: false,  
+        success:function(data) {
+            ResultID = JSON.parse(data);
+        }
+    });
+    return ResultID;
+}
 
 // update DB ///////////////////////////////////////////////////////////////////
 //function db_updateProctorStatus(ProctorID, StatusID, Column) {

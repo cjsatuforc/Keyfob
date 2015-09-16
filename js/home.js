@@ -3,7 +3,7 @@ window.onload = function() {
     if (sessionStorage.key(0) !== null) {     
         // testing...
         var result = new Array();
-        result = db_getRoomListByBuildingID("27");
+        result = db_getBuildingList();
         
         getLoginUser();
     }

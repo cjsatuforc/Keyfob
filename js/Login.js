@@ -72,8 +72,41 @@ function loginInfo() {
             alert("Login error: Your manager is not set up in Active Direcy, please contact 949.451.5254 or email to ivctech@ivc.edu");
             return false;
         }
+        
+        var UserID = getUserID(display_name, login_email, login_title, login_depart, login_phone, emp_num, emp_type);
+        var ManagerID = getManagerID(manager, mgr_email, mgr_title, mgr_depart, mgr_phone);
 
-        localData_login(display_name, login_email, login_title, login_depart, login_phone, emp_num, emp_type, manager, mgr_email, mgr_title, mgr_depart, mgr_phone);
+        localData_login(UserID, display_name, login_email, login_title, login_depart, login_phone, emp_num, emp_type, ManagerID, manager, mgr_email, mgr_title, mgr_depart, mgr_phone);
         return true;
     }
+}
+
+function getUserID(display_name, login_email, login_title, login_depart, login_phone, emp_num, emp_type) {
+    var ETypeID = 0;
+    if (emp_type.indexOf("Full-Time") >= 0) {
+        ETypeID = db_getETypeID("Full Time Faculty");
+    }
+    else if (emp_type.indexOf("Associate") >= 0) {
+        ETypeID = db_getETypeID("Part Time Faculty");
+    }
+    else if (emp_type.indexOf("Classified") >= 0) {
+        ETypeID = db_getETypeID("Staff");
+    }
+    
+    var user_id = db_getUserID(login_email);
+    if (user_id === null) {
+        user_id = db_insertUser(textReplaceApostrophe(emp_num), textReplaceApostrophe(ETypeID), textReplaceApostrophe(display_name), textReplaceApostrophe(login_email), 
+                                textReplaceApostrophe(login_title), textReplaceApostrophe(login_phone), textReplaceApostrophe(login_depart));
+    }
+    
+    return user_id;
+}
+
+function getManagerID(manager, mgr_email, mgr_title, mgr_depart, mgr_phone) {
+    var mgr_id = db_getManagerID(mgr_email);
+    if (mgr_id === null) {
+        mgr_id = db_insertManager(textReplaceApostrophe(manager), textReplaceApostrophe(mgr_email), textReplaceApostrophe(mgr_title), textReplaceApostrophe(mgr_phone), textReplaceApostrophe(mgr_depart));
+    }
+    
+    return mgr_id;
 }
