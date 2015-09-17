@@ -2,9 +2,8 @@
 window.onload = function() {
     if (sessionStorage.key(0) !== null) {     
         // testing...
-        var result = new Array();
-        result = db_getBuildingList();
-        
+        //var result = new Array();
+        //result = db_getBuildingList();
         getLoginUser();
     }
     else {
@@ -156,12 +155,12 @@ function setBodySmall() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function getLoginUser() {
-    $('#login_user').html(sessionStorage.getItem('ss_keyfob_loginName'));
+    $('#login_user').html(sessionStorage.getItem('ss_keyfob_display_name'));
 
     $('#cur_date').val(getToday());
-    $('#requestor').val(sessionStorage.getItem('ss_keyfob_loginName'));
-    $('#title').val(sessionStorage.getItem('ss_keyfob_title'));
-    $('#phone').val(sessionStorage.getItem('ss_keyfob_loginPhone'));
-    $('#department').val(sessionStorage.getItem('ss_keyfob_department'));
+    $('#requestor').val(sessionStorage.getItem('ss_keyfob_display_name'));
+    $('#title').val(sessionStorage.getItem('ss_keyfob_login_title'));
+    $('#phone').val(sessionStorage.getItem('ss_keyfob_login_phone'));
+    $('#department').val(sessionStorage.getItem('ss_keyfob_login_depart'));
     $('#manager').val(sessionStorage.getItem('ss_keyfob_manager'));
 }

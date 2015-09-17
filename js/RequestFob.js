@@ -2,8 +2,8 @@
 //var t_emp_type = "Classified Non-Bargaining Unit";
 var t_emp_type = sessionStorage.getItem('ss_keyfob_emp_type');
 var SearchWord1 = /full time/i;     //Full Time
-var SearchWord2 = /part time/i;     //Part Time
-var SearchWord3 = /Class/i;         //Classified
+var SearchWord2 = /associate/i;     //Part Time
+var SearchWord3 = /classified/i;    //Classified - Staff
 if (SearchWord1.test(t_emp_type)=== true){
     document.form1.emp_type2[0].checked = true;
 }else if (SearchWord2.test(t_emp_type)=== true){
@@ -16,7 +16,9 @@ if (SearchWord1.test(t_emp_type)=== true){
 
 //Select Style Set
 $(function(){
-    $('.selectpicker').selectpicker();
+    $('.selectpicker').selectpicker({
+        //size:10
+    });
 });
 
 //Selectbox Create
@@ -55,12 +57,12 @@ $(function () {
         temp_tr_id = document.getElementById("temp_tr_id").value - 0 + 1;
         document.getElementById("temp_tr_id").value = temp_tr_id;
         //build up the row we are wanting to add
-        var newRow = '<tr><td></td>'+
-        '<td><select id="selectionA' + temp_tr_id + '" class="selectpicker" data-width="100%" onchange="selChange('+temp_tr_id+');">'+sb1_op+'</select></td>'+
-        '<td><select id="selectionB' + temp_tr_id + '" class="selectpicker" data-width="100%">'+sb2_op+'</td>'+
-        '<td><input id="key_num'+temp_tr_id+'" class="form-control" value="" placeholder="Key#"></td>'+
+        var newRow = '<tr>'+
+        '<td><select name="selectionA" id="selectionA' + temp_tr_id + '" class="selectpicker" data-width="100%" onchange="selChange('+temp_tr_id+');">'+sb1_op+'</select></td>'+
+        '<td><select name="selectionB" id="selectionB' + temp_tr_id + '" class="selectpicker" data-width="100%">'+sb2_op+'</td>'+
+        '<td><input name="key_num" id="key_num'+temp_tr_id+'" class="form-control" value="" placeholder="Key#"></td>'+
         '<td><div style="margin-top:5px;"><button class="row-delete btn btn-primary btn-xs" type="button"><i class="fa fa-trash"></i></button></div></td>'+
-        '</tr>';
+        '<td></td></tr>';
         //add it
         footable.appendRow(newRow);
         $('.selectpicker').selectpicker('refresh');
@@ -90,4 +92,99 @@ function removeAll(oSelect,selNo) {
     }
     oSelect.options[0] = new Option("Select...","");	//Make first line to default value.
     $('.selectpicker').selectpicker('refresh');
+}
+
+//check space only, by [document.getElementById]
+function SpaceCheck(var_value) {
+    var wspace;
+    var vchar;
+    var var_value = document.getElementById(var_value).value;
+    if(var_value.length === 0) return false;
+    for(i=0; i < var_value.length; i++) {
+        valueChar = var_value.substr(i, 1);
+        if(valueChar === ' ') return false;
+        else if(valueChar !== ' ') return true;
+    }
+}
+
+function save_form(){
+    swal({
+        title: "Are you sure save it?",
+        text: "You will be able to add/change/delete this Key/Fob request.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, save it!",
+        closeOnConfirm: false
+    },
+    function(){
+        //document.form1.action = "request_save.php";
+        //document.form1.submit();
+        swal("Successfully Saved!","Your request has been saved.", "success"); });
+    return;
+}
+
+function submit_form(){
+    //swal("Warning", "Please check below reasons\\nsdafds", "warning");
+    //swal.showInputError("Invalid email! \\n askldf");
+    var rowCount = document.getElementById('options-table').rows.length - 1;    //At this time, Table`s TR tag count.
+    for (var i=0; i<rowCount; i++){
+        if (document.getElementsByName("selectionA")[i].options.selectedIndex==="0" || document.getElementsByName("selectionB")[i].options.selectedIndex==="0" || document.getElementsByName("key_num")[i].value===""){
+            swal({
+                title: "Warnning",
+                text: "<span align=left>Building# , Room# and Key# fields are required field.</span>",
+                type:"warning",   //error | success | warning
+                html: true
+            });
+            return;    
+            break;
+        }
+    }
+    if(document.form1.emp_type2[0].checked===false && document.form1.emp_type2[1].checked===false && document.form1.emp_type2[2].checked===false){
+        swal({
+            title: "Warnning",
+            text: "<span align=left>Employee type is required field</span>"+ErrorMessageText,
+            type:"warning",   //error | success | warning
+            html: true
+        });
+    }else if(!SpaceCheck("phone")) {
+        swal({
+            title: "Warnning",
+            text: "<span align=left>Phone number is a required field.</span>",
+            type:"warning",   //error | success | warning
+            html: true
+        });
+        return;
+    }else if(!SpaceCheck("department")) {
+        swal({
+            title: "Warnning",
+            text: "<span align=left>Department is a required field.</span>",
+            type:"warning",   //error | success | warning
+            html: true
+        });
+        return;
+    }else if(!SpaceCheck("justification")) {
+        swal({
+            title: "Warnning",
+            text: "<span align=left>Justification is a required field.</span>",
+            type:"warning",   //error | success | warning
+            html: true
+        });
+        return;
+    }else{
+        swal({
+            title: "Are you sure?",
+            text: "You are sending a Key/Fob request form.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, submit.",
+            closeOnConfirm: false
+        },
+        function(){
+            //document.form1.action = "request_submit.php";
+            //document.form1.submit();
+            swal("Successfully Submitted!","Your request has been submitted.", "success"); });
+        return;
+    }
 }
