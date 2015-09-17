@@ -1,0 +1,34 @@
+.icons-box2 {
+    padding: 0px;
+}
+
+.icons-box2 h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.icons-box2 .infont {
+    text-align: center;
+    valign: middle;
+    margin: 0px 0px;
+}
+
+.icons-box2 .infont i {
+    display: table-cell;
+    vertical-align: middle;​
+    valign: middle;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    color: #676A6C;
+}
+
+.icons-box2 .infont span {
+    color: #A6A8A9;
+}
+
+.icons-box2 .infont span {
+    margin: 1px;
+    display: block;
+}
