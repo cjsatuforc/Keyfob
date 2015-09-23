@@ -125,52 +125,33 @@ function save_form(){
 }
 
 function submit_form(){
-    //swal("Warning", "Please check below reasons\\nsdafds", "warning");
-    //swal.showInputError("Invalid email! \\n askldf");
     var rowCount = document.getElementById('options-table').rows.length - 1;    //At this time, Table`s TR tag count.
+    var err_msg = "";
     for (var i=0; i<rowCount; i++){
-        if (document.getElementsByName("selectionA")[i].options.selectedIndex==="0" || document.getElementsByName("selectionB")[i].options.selectedIndex==="0" || document.getElementsByName("key_num")[i].value===""){
-            swal({
-                title: "Warnning",
-                text: "<span align=left>Building# , Room# and Key# fields are required field.</span>",
-                type:"warning",   //error | success | warning
-                html: true
-            });
-            return;    
+        if (document.getElementsByName("selectionA")[i].options.selectedIndex=="0" || document.getElementsByName("selectionB")[i].options.selectedIndex=="0" || document.getElementsByName("key_num")[i].value==""){
+            err_msg += "Building# , Room# and Key# fields are required field.<br />"
             break;
         }
     }
     if(document.form1.emp_type2[0].checked===false && document.form1.emp_type2[1].checked===false && document.form1.emp_type2[2].checked===false){
+        err_msg += "Employee type is required field.<br />"
+    }
+    if(!SpaceCheck("phone")) {
+        err_msg += "Phone number is required field.<br />"
+    }
+    if(!SpaceCheck("department")) {
+        err_msg += "Department is a required field.<br />"
+    }
+    if(!SpaceCheck("justification")) {
+        err_msg += "Justification is a required field.<br />"
+    }
+    if (err_msg !== "") {
         swal({
             title: "Warnning",
-            text: "<span align=left>Employee type is required field</span>"+ErrorMessageText,
+            text: err_msg,
             type:"warning",   //error | success | warning
             html: true
         });
-    }else if(!SpaceCheck("phone")) {
-        swal({
-            title: "Warnning",
-            text: "<span align=left>Phone number is a required field.</span>",
-            type:"warning",   //error | success | warning
-            html: true
-        });
-        return;
-    }else if(!SpaceCheck("department")) {
-        swal({
-            title: "Warnning",
-            text: "<span align=left>Department is a required field.</span>",
-            type:"warning",   //error | success | warning
-            html: true
-        });
-        return;
-    }else if(!SpaceCheck("justification")) {
-        swal({
-            title: "Warnning",
-            text: "<span align=left>Justification is a required field.</span>",
-            type:"warning",   //error | success | warning
-            html: true
-        });
-        return;
     }else{
         swal({
             title: "Are you sure?",
