@@ -45,8 +45,11 @@ $(function () {
         var footable = $('table').data('footable');
         //get the row we are wanting to delete
         var row = $(this).parents('tr:first');
-        //delete the row
-        footable.removeRow(row);
+        var rowCount = document.getElementById('options-table').rows.length - 1;    //At this time, Table`s TR tag count.
+        if (rowCount>1){
+            //if key request line is 2 or more, delete the row. Less than 1, do not delete.
+            footable.removeRow(row);
+        }
     });
 
     $('.add-row').click(function(e) {
@@ -129,21 +132,21 @@ function submit_form(){
     var err_msg = "";
     for (var i=0; i<rowCount; i++){
         if (document.getElementsByName("selectionA")[i].options.selectedIndex=="0" || document.getElementsByName("selectionB")[i].options.selectedIndex=="0" || document.getElementsByName("key_num")[i].value==""){
-            err_msg += "Building# , Room# and Key# fields are required field.<br />"
+            err_msg += "Building# , Room# and Key# fields are required.<br />";
             break;
         }
     }
     if(document.form1.emp_type2[0].checked===false && document.form1.emp_type2[1].checked===false && document.form1.emp_type2[2].checked===false){
-        err_msg += "Employee type is required field.<br />"
+        err_msg += "Employee type is required.<br />";
     }
     if(!SpaceCheck("phone")) {
-        err_msg += "Phone number is required field.<br />"
+        err_msg += "Phone number is required.<br />";
     }
     if(!SpaceCheck("department")) {
-        err_msg += "Department is a required field.<br />"
+        err_msg += "Department is required.<br />";
     }
     if(!SpaceCheck("justification")) {
-        err_msg += "Justification is a required field.<br />"
+        err_msg += "Justification is required.<br />";
     }
     if (err_msg !== "") {
         swal({
@@ -154,7 +157,7 @@ function submit_form(){
         });
     }else{
         swal({
-            title: "Are you sure?",
+            title: "Are you sure submit?",
             text: "You are sending a Key/Fob request form.",
             type: "warning",
             showCancelButton: true,
