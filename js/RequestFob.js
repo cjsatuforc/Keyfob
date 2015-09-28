@@ -25,15 +25,15 @@ $(function(){
 var i=0;
 var sb1,sb1_op;
 var sb2,sb2_op;
-sb1_op = '<option value="">Select...</option>';    
+sb1_op = '<option value="">Select...</option>';
 sb2_op = '<option value="">Select...</option>';
-var arr_room_no = new Array();    
+var arr_room_no = new Array();
 var arr_builing_no  = new Array();
 arr_builing_no      = db_getBuildingList(); //Building# lists from db
 
 //First Dropdown Menu - Building#
 for (i=0; i<arr_builing_no.length; i++){
-    sb1_op = sb1_op + '<option value="' + arr_builing_no[i][0] + '">' + arr_builing_no[i][1] + '</option>';    
+    sb1_op = sb1_op + '<option value="' + arr_builing_no[i][0] + '">' + arr_builing_no[i][1] + '</option>';
     document.getElementById("selectionA0").options[i+1] = new Option(arr_builing_no[i][1],arr_builing_no[i][0]);
 }
 
@@ -130,7 +130,13 @@ function save_form(){
 function submit_form(){
     var rowCount = document.getElementById('options-table').rows.length - 1;    //At this time, Table`s TR tag count.
     var err_msg = "";
-    for (var i=0; i<rowCount; i++){
+    if(!SpaceCheck("phone")) {
+        err_msg += "Phone number is required.<br />";
+    }
+    if(!SpaceCheck("department")) {
+        err_msg += "Department is required.<br />";
+    }
+	for (var i=0; i<rowCount; i++){
         if (document.getElementsByName("selectionA")[i].options.selectedIndex=="0" || document.getElementsByName("selectionB")[i].options.selectedIndex=="0" || document.getElementsByName("key_num")[i].value==""){
             err_msg += "Building# , Room# and Key# fields are required.<br />";
             break;
@@ -138,12 +144,6 @@ function submit_form(){
     }
     if(document.form1.emp_type2[0].checked===false && document.form1.emp_type2[1].checked===false && document.form1.emp_type2[2].checked===false){
         err_msg += "Employee type is required.<br />";
-    }
-    if(!SpaceCheck("phone")) {
-        err_msg += "Phone number is required.<br />";
-    }
-    if(!SpaceCheck("department")) {
-        err_msg += "Department is required.<br />";
     }
     if(!SpaceCheck("justification")) {
         err_msg += "Justification is required.<br />";
@@ -165,10 +165,15 @@ function submit_form(){
             confirmButtonText: "Yes, submit.",
             closeOnConfirm: false
         },
-        function(){
+        function(isConfirm){
             //document.form1.action = "request_submit.php";
             //document.form1.submit();
-            swal("Successfully Submitted!","Your request has been submitted.", "success"); });
+            if (isConfirm) {
+                swal("Successfully Submitted!","Your request has been submitted.", "success");
+            }else{
+                swal("Failed Submitted.","Your request has been canceled.", "error");
+            }
+        });
         return;
     }
 }
