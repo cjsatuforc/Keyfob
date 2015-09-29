@@ -163,7 +163,9 @@ function submit_form(){
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Yes, submit.",
-            closeOnConfirm: false
+            //cancelButtonText: "No, cancel.",
+            closeOnConfirm: false,
+            closeOnCancel: true
         },
         function(isConfirm){
             //document.form1.action = "request_submit.php";
