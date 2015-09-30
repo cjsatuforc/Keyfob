@@ -83,16 +83,6 @@ function loginInfo() {
 
 function getUserID(display_name, login_email, login_title, login_depart, login_phone, emp_num, emp_type) {
     var ETypeID = 0;
-    if (emp_type.indexOf("Full-Time") >= 0) {
-        ETypeID = db_getETypeID("Full Time Faculty");
-    }
-    else if (emp_type.indexOf("Associate") >= 0) {
-        ETypeID = db_getETypeID("Part Time Faculty");
-    }
-    else if (emp_type.indexOf("Classified") >= 0) {
-        ETypeID = db_getETypeID("Staff");
-    }
-
     if (login_phone === null) {
         login_phone = "";
     }
@@ -101,6 +91,16 @@ function getUserID(display_name, login_email, login_title, login_depart, login_p
     }
     if (emp_type === null) {
         emp_type = "0";
+    }
+    
+    if (emp_type.indexOf("Full-Time") >= 0) {
+        ETypeID = db_getETypeID("Full Time Faculty");
+    }
+    else if (emp_type.indexOf("Associate") >= 0) {
+        ETypeID = db_getETypeID("Part Time Faculty");
+    }
+    else if (emp_type.indexOf("Classified") >= 0) {
+        ETypeID = db_getETypeID("Staff");
     }
     
     var user_id = db_getUserID(login_email);
