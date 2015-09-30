@@ -151,19 +151,61 @@ function db_insertLocation(KeyfobID, BuildingID, RoomID, KeyNum) {
 }
 
 // update DB ///////////////////////////////////////////////////////////////////
-//function db_updateProctorStatus(ProctorID, StatusID, Column) {
-//    var Result = false;
-//    $.ajax({
-//        type:"POST",
-//        url:"php/db_updateProctorStatus.php",
-//        data:{ProctorID:ProctorID, StatusID:StatusID, Column:Column},
-//        async: false,  
-//        success:function(data) {
-//            Result = JSON.parse(data);
-//        }
-//    });
-//    return Result;
-//}
+function db_updateUser(UserID, EmployeeID, ETypeID, UserName, UserEmail, UserTitle, Phone, Department) {
+    var Result = false;
+    $.ajax({
+        type:"POST",
+        url:"php/db_updateUser.php",
+        data:{UserID:UserID, EmployeeID:EmployeeID, ETypeID:ETypeID, UserName:UserName, UserEmail:UserEmail, UserTitle:UserTitle, Phone:Phone, Department:Department},
+        async: false,  
+        success:function(data) {
+            Result = JSON.parse(data);
+        }
+    });
+    return Result;
+}
+
+function db_updateKeyfob(KeyfobID, StatusID, UserID, ManagerID, CreateDate, Justification, Replace) {
+    var Result = false;
+    $.ajax({
+        type:"POST",
+        url:"php/db_updateKeyfob.php",
+        data:{KeyfobID:KeyfobID, StatusID:StatusID, UserID:UserID, ManagerID:ManagerID, CreateDate:CreateDate, Justification:Justification, Replace:Replace},
+        async: false,  
+        success:function(data) {
+            Result = JSON.parse(data);
+        }
+    });
+    return Result;
+}
+
+function db_updateKeyfobStatus(KeyfobID, StatusID) {
+    var Result = false;
+    $.ajax({
+        type:"POST",
+        url:"php/db_updateKeyfobStatus.php",
+        data:{KeyfobID:KeyfobID, StatusID:StatusID},
+        async: false,  
+        success:function(data) {
+            Result = JSON.parse(data);
+        }
+    });
+    return Result;
+}
+
+function db_updateLocation(LocationID, KeyfobID, BuildingID, RoomID, KeyNum) {
+    var Result = false;
+    $.ajax({
+        type:"POST",
+        url:"php/db_updateLocation.php",
+        data:{LocationID:LocationID, KeyfobID:KeyfobID, BuildingID:BuildingID, RoomID:RoomID, KeyNum:KeyNum},
+        async: false,  
+        success:function(data) {
+            Result = JSON.parse(data);
+        }
+    });
+    return Result;
+}
 
 // upload attach file //////////////////////////////////////////////////////////
 //function uploadAttachFile(file_data) {
