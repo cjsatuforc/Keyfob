@@ -122,12 +122,12 @@ function db_insertManager(MgrName, MgrEmail, MgrTitle, MgrPhone, Department) {
     return ResultID;
 }
 
-function db_insertKeyfob(StatusID, UserID, ManagerID, CreateDate, Justification, Replace) {
+function db_insertKeyfob(StatusID, UserID, ManagerID, CreateDate, Justification, ReplaceKey) {
     var ResultID = "";
     $.ajax({
         type:"POST",
         url:"php/db_insertKeyfob.php",
-        data:{StatusID:StatusID, UserID:UserID, ManagerID:ManagerID, CreateDate:CreateDate, Justification:Justification, Replace:Replace},
+        data:{StatusID:StatusID, UserID:UserID, ManagerID:ManagerID, CreateDate:CreateDate, Justification:Justification, ReplaceKey:ReplaceKey},
         async: false,  
         success:function(data) {
             ResultID = JSON.parse(data);
@@ -165,12 +165,12 @@ function db_updateUser(UserID, EmployeeID, ETypeID, UserName, UserEmail, UserTit
     return Result;
 }
 
-function db_updateKeyfob(KeyfobID, StatusID, UserID, ManagerID, CreateDate, Justification, Replace) {
+function db_updateKeyfob(KeyfobID, StatusID, UserID, ManagerID, CreateDate, Justification, ReplaceKey) {
     var Result = false;
     $.ajax({
         type:"POST",
         url:"php/db_updateKeyfob.php",
-        data:{KeyfobID:KeyfobID, StatusID:StatusID, UserID:UserID, ManagerID:ManagerID, CreateDate:CreateDate, Justification:Justification, Replace:Replace},
+        data:{KeyfobID:KeyfobID, StatusID:StatusID, UserID:UserID, ManagerID:ManagerID, CreateDate:CreateDate, Justification:Justification, ReplaceKey:ReplaceKey},
         async: false,  
         success:function(data) {
             Result = JSON.parse(data);
