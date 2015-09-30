@@ -1,5 +1,5 @@
 <?php
-    $server = "idc1.ivc.edu idc2.ivc.edu idc3.vic.edu";
+    $server = "idc1.ivc.edu idc2.ivc.edu idc3.ivc.edu";
     $baseDN = "dc=ivc,dc=edu";
          
     $username = filter_input(INPUT_POST, 'username');
