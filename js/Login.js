@@ -92,10 +92,20 @@ function getUserID(display_name, login_email, login_title, login_depart, login_p
     else if (emp_type.indexOf("Classified") >= 0) {
         ETypeID = db_getETypeID("Staff");
     }
+
+    if (login_phone === null) {
+        login_phone = "";
+    }
+    if (emp_num === null) {
+        emp_num = "";
+    }
+    if (emp_type === null) {
+        emp_type = "0";
+    }
     
     var user_id = db_getUserID(login_email);
     if (user_id === null) {
-        user_id = db_insertUser(textReplaceApostrophe(emp_num), textReplaceApostrophe(ETypeID), textReplaceApostrophe(display_name), textReplaceApostrophe(login_email), 
+        user_id = db_insertUser(textReplaceApostrophe(emp_num), ETypeID, textReplaceApostrophe(display_name), textReplaceApostrophe(login_email), 
                                 textReplaceApostrophe(login_title), textReplaceApostrophe(login_phone), textReplaceApostrophe(login_depart));
     }
     
@@ -103,6 +113,10 @@ function getUserID(display_name, login_email, login_title, login_depart, login_p
 }
 
 function getManagerID(manager, mgr_email, mgr_title, mgr_depart, mgr_phone) {
+    if (mgr_phone === null) {
+        mgr_phone = "";
+    }
+    
     var mgr_id = db_getManagerID(mgr_email);
     if (mgr_id === null) {
         mgr_id = db_insertManager(textReplaceApostrophe(manager), textReplaceApostrophe(mgr_email), textReplaceApostrophe(mgr_title), textReplaceApostrophe(mgr_phone), textReplaceApostrophe(mgr_depart));
