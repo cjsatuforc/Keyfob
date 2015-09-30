@@ -122,12 +122,12 @@ function db_insertManager(MgrName, MgrEmail, MgrTitle, MgrPhone, Department) {
     return ResultID;
 }
 
-function db_insertKeyfob(UserID, ManagerID, Justification, Replace) {
+function db_insertKeyfob(StatusID, UserID, ManagerID, Justification, Replace) {
     var ResultID = "";
     $.ajax({
         type:"POST",
         url:"php/db_insertKeyfob.php",
-        data:{UserID:UserID, ManagerID:ManagerID, Justification:Justification, Replace:Replace},
+        data:{StatusID:StatusID, UserID:UserID, ManagerID:ManagerID, Justification:Justification, Replace:Replace},
         async: false,  
         success:function(data) {
             ResultID = JSON.parse(data);
