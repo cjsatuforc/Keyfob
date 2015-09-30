@@ -7,11 +7,11 @@
     $ManagerID = filter_input(INPUT_POST, 'ManagerID');
     $CreateDate = filter_input(INPUT_POST, 'CreateDate');
     $Justification = filter_input(INPUT_POST, 'Justification');
-    $Replace = filter_input(INPUT_POST, 'Replace');
+    $ReplaceKey = filter_input(INPUT_POST, 'ReplaceKey');
 
     $query = "UPDATE [IVCKEY].[dbo].[Keyfob] "
             ."SET StatusID = '".$StatusID."', UserID = '".$UserID."', ManagerID = '".$ManagerID."', "
-            ."CreateDate = '".$CreateDate."', Justification = '".$Justification."', Replace = '".$Replace."', DTStamp = getdate() "
+            ."CreateDate = '".$CreateDate."', Justification = '".$Justification."', ReplaceKey = '".$ReplaceKey."', DTStamp = getdate() "
             ."WHERE KeyfobID = '".$KeyfobID."'";
     
     $cmd = $dbConn->prepare($query);

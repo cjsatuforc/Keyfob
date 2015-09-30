@@ -6,10 +6,10 @@
     $ManagerID = filter_input(INPUT_POST, 'ManagerID');
     $CreateDate = filter_input(INPUT_POST, 'CreateDate');
     $Justification = filter_input(INPUT_POST, 'Justification');
-    $Replace = filter_input(INPUT_POST, 'Replace');
+    $ReplaceKey = filter_input(INPUT_POST, 'ReplaceKey');
     
-    $query = "INSERT INTO [IVCKEY].[dbo].[Keyfob] (StatusID, UserID, ManagerID, CreateDate, Justification, Replace) "
-                ."VALUES ('$StatusID', $UserID', '$ManagerID', '$CreateDate', '$Justification', '$Replace')";  
+    $query = "INSERT INTO [IVCKEY].[dbo].[Keyfob] (StatusID, UserID, ManagerID, CreateDate, Justification, ReplaceKey) "
+                ."VALUES ('$StatusID', '$UserID', '$ManagerID', '$CreateDate', '$Justification', '$ReplaceKey')";  
     
     $cmd = $dbConn->prepare($query);
     $cmd->execute();
