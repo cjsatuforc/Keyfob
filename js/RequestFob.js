@@ -203,6 +203,7 @@ function updateUser(){
     var_UserTitle   = sessionStorage.getItem('ss_keyfob_login_title');
     var_Phone       = document.getElementById('phone').value;
     var_Department  = document.getElementById('department').value;
+    /*   Here.   */
     //db_updateUser(var_UserID,var_EmployeeID,var_ETypeID,var_UserName,var_UserEmail,var_UserTitle,var_Phone,var_Department);
     alert(var_UserID+"\n"+var_EmployeeID+"\n"+var_ETypeID+"\n"+var_UserName+"\n"+var_UserEmail+"\n"+var_UserTitle+"\n"+var_Phone+"\n"+var_Department);
 }
