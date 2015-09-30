@@ -5,11 +5,11 @@ var SearchWord1 = /full time/i;     //Full Time
 var SearchWord2 = /associate/i;     //Part Time
 var SearchWord3 = /classified/i;    //Classified - Staff
 if (SearchWord1.test(t_emp_type)=== true){
-    $('input:radio[id=emp_type2]:input[value=full]').attr("checked", true);
+    $('input:radio[id=emp_type2]:input[value=1]').attr("checked", true);
 }else if (SearchWord2.test(t_emp_type)=== true){
-    $('input:radio[id=emp_type2]:input[value=part]').attr("checked", true);
+    $('input:radio[id=emp_type2]:input[value=2]').attr("checked", true);
 }else if (SearchWord3.test(t_emp_type)=== true){
-    $('input:radio[id=emp_type2]:input[value=staff]').attr("checked", true);
+    $('input:radio[id=emp_type2]:input[value=3]').attr("checked", true);
 }else{
     //alert("Please select your employee type.          ");
 }
@@ -63,7 +63,7 @@ $(function () {
         var newRow = '<tr>'+
         '<td><select name="selectionA" id="selectionA' + temp_tr_id + '" class="selectpicker" data-width="100%" onchange="selChange('+temp_tr_id+');">'+sb1_op+'</select></td>'+
         '<td><select name="selectionB" id="selectionB' + temp_tr_id + '" class="selectpicker" data-width="100%">'+sb2_op+'</td>'+
-        '<td><input name="key_num" id="key_num'+temp_tr_id+'" class="form-control" value="" placeholder="Key#"></td>'+
+        '<td><input name="key_num" id="key_num'+temp_tr_id+'" class="form-control" value="" placeholder="Key#"><input id="t_selected_id" name="t_selected_id" type="hidden" value="'+temp_tr_id+'"></td>'+
         '<td><div style="margin-top:5px;"><button class="row-delete btn btn-primary btn-xs" type="button"><i class="fa fa-trash"></i></button></div></td>'+
         '<td></td></tr>';
         //add it
@@ -121,9 +121,18 @@ function save_form(){
         closeOnConfirm: false
     },
     function(){
-        //document.form1.action = "request_save.php";
-        //document.form1.submit();
-        swal("Successfully Saved!","Your request has been saved.", "success"); });
+        $("#btn_save").prop("disabled", true);
+        var step_save2 = insertKeyfob('1');             //  1:Save as Draft / 2:Submiited
+        var step_save3 = insertLocation(step_save2);    //  step_save2 : Keyfob ID
+
+        if (step_save2!=="" && step_save3!=="") {
+            swal("Successfully Saved!","Your request has been saved.", "success");
+            window.open('keyfob_activelist.html', '_self');
+        }else{
+            swal("Failed Saved.","Your request has been canceled.", "error");
+            $("#btn_save").prop("disabled", false);
+        }
+    });
     return;
 }
 
@@ -169,17 +178,15 @@ function submit_form(){
             closeOnCancel: true
         },
         function(){
-            //document.form1.action = "request_submit.php";
-            //document.form1.submit();
-             $("#btn_submit").prop("disabled", true);
-            updateUser();   //  User Information
-            //saveLocalData_RequestFob();   //  Key or Fob information
-            //saveLocalData_RequestFob();   //  Justification and Stolen check
+            $("#btn_submit").prop("disabled", true);
+            var step_save1 = updateUser();
+            var step_save2 = insertKeyfob('2');             //  1:Save as Draft / 2:Submiited
+            var step_save3 = insertLocation(step_save2);    //  step_save2 : Keyfob ID
 
-            var result_submit=true;
-            if (result_submit==true) {
+            if (step_save1===true && step_save2!=="" && step_save3!=="") {
                 swal("Successfully Submitted!","Your request has been submitted.", "success");
-                //window.open('keyfob_activelist.html', '_self');
+                window.open('keyfob_activelist.html', '_self');
+                //$("#btn_submit").prop("disabled", false);
             }else{
                 swal("Failed Submitted.","Your request has been canceled.", "error");
                 $("#btn_submit").prop("disabled", false);
@@ -191,34 +198,59 @@ function submit_form(){
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*             Don't send data to DB before confirmed source.                 */
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function updateUser(){
-    var_UserID      = sessionStorage.getItem('ss_keyfob_login_user_id');
-    var_EmployeeID  = sessionStorage.getItem('ss_keyfob_mgr_id');
-    var_ETypeID     = $(':radio[id="emp_type2"]:checked').val();
-    var_UserName    = sessionStorage.getItem('ss_keyfob_display_name');
-    var_UserEmail   = sessionStorage.getItem('ss_keyfob_login_email');
-    var_UserTitle   = sessionStorage.getItem('ss_keyfob_login_title');
-    var_Phone       = document.getElementById('phone').value;
-    var_Department  = document.getElementById('department').value;
-    /*   Here.   */
-    //db_updateUser(var_UserID,var_EmployeeID,var_ETypeID,var_UserName,var_UserEmail,var_UserTitle,var_Phone,var_Department);
-    alert(var_UserID+"\n"+var_EmployeeID+"\n"+var_ETypeID+"\n"+var_UserName+"\n"+var_UserEmail+"\n"+var_UserTitle+"\n"+var_Phone+"\n"+var_Department);
+    var UserID      = sessionStorage.getItem('ss_keyfob_login_user_id');
+    var EmployeeID  = sessionStorage.getItem('ss_keyfob_mgr_id');
+    var ETypeID     = $(':radio[id="emp_type2"]:checked').val();
+    var UserName    = sessionStorage.getItem('ss_keyfob_display_name');
+    var UserEmail   = sessionStorage.getItem('ss_keyfob_login_email');
+    var UserTitle   = sessionStorage.getItem('ss_keyfob_login_title');
+    var Phone       = document.getElementById('phone').value;
+    var Department  = document.getElementById('department').value;
+
+    var step_update = db_updateUser(UserID, EmployeeID, ETypeID, UserName, UserEmail, UserTitle, Phone, Department);
+    if (!step_update) {
+        alert("System error, please call x5596 for help\n");
+        return false;
+    }
+    return step_update;
 }
 
-function db_updateUser(UserID,EmployeeID,ETypeID,UserName,UserEmail,UserTitle,Phone,Department) {
-    var ResultID = "";
-    Description = textReplaceApostrophe(Description);
-    $.ajax({
-        type:"POST",
-        url:"php/db_insert_user.php",
-        data:{UserID:UserID, EmployeeID:EmployeeID, ETypeID:ETypeID, UserName:UserName, UserEmail:UserEmail, UserTitle:UserTitle, Phone:Phone, Department:Department},
-        async: false,
-        success:function(data) {
-            ResultID = JSON.parse(data);
-        }
-    });
-    return ResultID;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function insertKeyfob(StatusID){
+    var UserID          = sessionStorage.getItem('ss_keyfob_login_user_id');
+    var ManagerID       = sessionStorage.getItem('ss_keyfob_mgr_id');
+    var Justification   = document.getElementById('justification').value;
+    var Replace         = document.getElementById('replacekey').checked;
+    if (Replace){
+        Replace = "true";
+    }else{
+        Replace = "false";
+    }
+
+    var step_update = db_insertKeyfob(StatusID, UserID, ManagerID, Justification, Replace);
+    if (!step_update) {
+        alert("System error, please call x5596 for help\n");
+    }
+    return step_update;
 }
+
+function insertLocation(KeyfobID){
+
+    var rowCount      = document.getElementById('options-table').rows.length - 1;    //  At this time, Table`s TR tag count.
+    var t_selected_id = document.getElementsByName('t_selected_id');
+    var current_id    = "0";
+
+    for(i=0; i<rowCount ; i++) {    // 0  to  rowCount-1
+        current_id = t_selected_id[i].value;
+        var BuildingID  = document.getElementById('selectionA'+current_id).value;
+        var RoomID      = document.getElementById('selectionB'+current_id).value;
+        var KeyNum      = document.getElementById('key_num'+current_id).value;
+
+        var step_update = db_insertLocation(KeyfobID, BuildingID, RoomID, KeyNum);
+    }
+    return step_update;
+}
+

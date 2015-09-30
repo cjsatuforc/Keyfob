@@ -74,9 +74,9 @@
                                             <label class="col-lg-1" style="padding-top: 5px;">Employee Type:</label>
                                             <div class="col-lg-4">
                                                 <div class="radio">
-                                                    <label> <input type="radio" class="i-checks" value="full" id="emp_type2"> Full Time Faculty </label>
-                                                    <label> <input type="radio" class="i-checks" value="part" id="emp_type2"> Part Time Faculty </label>
-                                                    <label> <input type="radio" class="i-checks" value="staff" id="emp_type2"> Staff </label>
+                                                    <label> <input type="radio" class="i-checks" value="1" id="emp_type2"> Full Time Faculty </label>
+                                                    <label> <input type="radio" class="i-checks" value="2" id="emp_type2"> Part Time Faculty </label>
+                                                    <label> <input type="radio" class="i-checks" value="3" id="emp_type2"> Staff </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                             <div class="panel-heading">
                                                 <b>Key(s) or Fob(s) requested for the following location:</b> &nbsp;&nbsp;
                                                 <a href="#add" class="btn btn-primary add-row">Add New Row</a>
-                                                <input id="temp_tr_id" type="hidden" value="1">
+                                                <input id="temp_tr_id" name="temp_tr_id" type="hidden" value="1">
                                             </div>
                                             <div class="panel-body">
 
@@ -138,6 +138,7 @@
                                                     </td>
                                                     <td>
                                                         <input name="key_num" id="key_num0" class="form-control" data-width="100%" placeholder="Key#">
+                                                        <input id="t_selected_id" name="t_selected_id" type="hidden" value="0">
                                                     </td>
                                                     <td>
                                                         <div style="margin-top:5px;">
@@ -161,7 +162,7 @@
                                     <div class="col-lg-10">
                                         <div class="row">
                                             <div class="checkbox">
-                                                <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="i-checks" id="reason" value="agreed">&nbsp;&nbsp;<b>This request is to replace keys that were LOST/MISPLACED/STOLEN.</b></label>
+                                                <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="i-checks" id="replacekey" value="y">&nbsp;&nbsp;<b>This request is to replace keys that were LOST/MISPLACED/STOLEN.</b></label>
                                             </div>
                                         </div>
                                     </div>
