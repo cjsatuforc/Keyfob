@@ -1,15 +1,15 @@
 //Employee Type Set
-//var t_emp_type = "Classified Non-Bargaining Unit";
+//var t_emp_type = "Classified Non-Bargaining Unit" or "Associate Faculty";
 var t_emp_type = sessionStorage.getItem('ss_keyfob_emp_type');
 var SearchWord1 = /full time/i;     //Full Time
 var SearchWord2 = /associate/i;     //Part Time
 var SearchWord3 = /classified/i;    //Classified - Staff
 if (SearchWord1.test(t_emp_type)=== true){
-    document.form1.emp_type2[0].checked = true;
+    $('input:radio[id=emp_type2]:input[value=full]').attr("checked", true);
 }else if (SearchWord2.test(t_emp_type)=== true){
-    document.form1.emp_type2[1].checked = true;
+    $('input:radio[id=emp_type2]:input[value=part]').attr("checked", true);
 }else if (SearchWord3.test(t_emp_type)=== true){
-    document.form1.emp_type2[2].checked = true;
+    $('input:radio[id=emp_type2]:input[value=staff]').attr("checked", true);
 }else{
     //alert("Please select your employee type.          ");
 }
@@ -128,7 +128,8 @@ function save_form(){
 }
 
 function submit_form(){
-    var rowCount = document.getElementById('options-table').rows.length - 1;    //At this time, Table`s TR tag count.
+    var emp_type_check = $(':radio[id="emp_type2"]:checked').val();             //  Employee Type. Sometimes will be possible to unchecked.
+    var rowCount = document.getElementById('options-table').rows.length - 1;    //  At this time, Table`s TR tag count.
     var err_msg = "";
     if(!SpaceCheck("phone")) {
         err_msg += "Phone number is required.<br />";
@@ -142,7 +143,7 @@ function submit_form(){
             break;
         }
     }
-    if(document.form1.emp_type2[0].checked===false && document.form1.emp_type2[1].checked===false && document.form1.emp_type2[2].checked===false){
+    if(emp_type_check==null){
         err_msg += "Employee type is required.<br />";
     }
     if(!SpaceCheck("justification")) {
@@ -167,15 +168,56 @@ function submit_form(){
             closeOnConfirm: false,
             closeOnCancel: true
         },
-        function(isConfirm){
+        function(){
             //document.form1.action = "request_submit.php";
             //document.form1.submit();
-            if (isConfirm) {
+             $("#btn_submit").prop("disabled", true);
+            updateUser();   //  User Information
+            //saveLocalData_RequestFob();   //  Key or Fob information
+            //saveLocalData_RequestFob();   //  Justification and Stolen check
+
+            var result_submit=true;
+            if (result_submit==true) {
                 swal("Successfully Submitted!","Your request has been submitted.", "success");
+                //window.open('keyfob_activelist.html', '_self');
             }else{
                 swal("Failed Submitted.","Your request has been canceled.", "error");
+                $("#btn_submit").prop("disabled", false);
             }
         });
         return;
     }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*             Don't send data to DB before confirmed source.                 */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function updateUser(){
+    var_UserID      = sessionStorage.getItem('ss_keyfob_login_user_id');
+    var_EmployeeID  = sessionStorage.getItem('ss_keyfob_mgr_id');
+    var_ETypeID     = $(':radio[id="emp_type2"]:checked').val();
+    var_UserName    = sessionStorage.getItem('ss_keyfob_display_name');
+    var_UserEmail   = sessionStorage.getItem('ss_keyfob_login_email');
+    var_UserTitle   = sessionStorage.getItem('ss_keyfob_login_title');
+    var_Phone       = document.getElementById('phone').value;
+    var_Department  = document.getElementById('department').value;
+    //db_updateUser(var_UserID,var_EmployeeID,var_ETypeID,var_UserName,var_UserEmail,var_UserTitle,var_Phone,var_Department);
+    alert(var_UserID+"\n"+var_EmployeeID+"\n"+var_ETypeID+"\n"+var_UserName+"\n"+var_UserEmail+"\n"+var_UserTitle+"\n"+var_Phone+"\n"+var_Department);
+}
+
+function db_updateUser(UserID,EmployeeID,ETypeID,UserName,UserEmail,UserTitle,Phone,Department) {
+    var ResultID = "";
+    Description = textReplaceApostrophe(Description);
+    $.ajax({
+        type:"POST",
+        url:"php/db_insert_user.php",
+        data:{UserID:UserID, EmployeeID:EmployeeID, ETypeID:ETypeID, UserName:UserName, UserEmail:UserEmail, UserTitle:UserTitle, Phone:Phone, Department:Department},
+        async: false,
+        success:function(data) {
+            ResultID = JSON.parse(data);
+        }
+    });
+    return ResultID;
 }
