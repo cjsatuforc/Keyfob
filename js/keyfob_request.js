@@ -224,11 +224,6 @@ function insertKeyfob(StatusID){
     var ManagerID       = sessionStorage.getItem('ss_keyfob_mgr_id');
     var Justification   = document.getElementById('justification').value;
     var Replace         = document.getElementById('replacekey').checked;
-    if (Replace){
-        Replace = "true";
-    }else{
-        Replace = "false";
-    }
 
     var step_update = db_insertKeyfob(StatusID, UserID, ManagerID, Justification, Replace);
     if (!step_update) {
