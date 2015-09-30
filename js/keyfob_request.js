@@ -196,7 +196,11 @@ function submit_form(){
     }
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
+function convertStringDateToDBDateFormat(str_date) {
+    var ar_date = str_date.split("/");
+    return ar_date[2] + "-" + ar_date[0] + "-" + ar_date[1];
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function updateUser(){
@@ -222,13 +226,11 @@ function updateUser(){
 function insertKeyfob(StatusID){
     var UserID          = sessionStorage.getItem('ss_keyfob_login_user_id');
     var ManagerID       = sessionStorage.getItem('ss_keyfob_mgr_id');
+    var CreateDate      = document.getElementById('cur_date').value;
     var Justification   = document.getElementById('justification').value;
     var Replace         = document.getElementById('replacekey').checked;
 
-    var step_update = db_insertKeyfob(StatusID, UserID, ManagerID, Justification, Replace);
-    if (!step_update) {
-        alert("System error, please call x5596 for help\n");
-    }
+    var step_update = db_insertKeyfob(StatusID, UserID, ManagerID, CreateDate, Justification, Replace);
     return step_update;
 }
 

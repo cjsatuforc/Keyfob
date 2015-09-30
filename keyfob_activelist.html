@@ -238,6 +238,35 @@
                 // Initialize Example 1
                 $('#example1').footable();        
             });
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            function getKeyfobUserActiveList(UserID) {
+                var Result = false;
+                $.ajax({
+                    type:"POST",
+                    url:"php/db_getKeyfobUserActiveList.php",
+                    data:{UserID:UserID},
+                    async: false,  
+                    success:function(data) {
+                        Result = JSON.parse(data);
+                    }
+                });
+                return Result;
+            }
+
+            var UserID = sessionStorage.getItem('ss_keyfob_login_user_id');
+
+            var arr_Keyfob_list = new Array();
+            arr_Keyfob_list     = getKeyfobUserActiveList(UserID);
+
+            alert(arr_Keyfob_list.length);
+
+
+
+
         </script>
 
 
