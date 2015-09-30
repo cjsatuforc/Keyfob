@@ -122,6 +122,7 @@ function db_insertManager(MgrName, MgrEmail, MgrTitle, MgrPhone, Department) {
     return ResultID;
 }
 
+// update
 function db_insertKeyfob(StatusID, UserID, ManagerID, Justification, Replace) {
     var ResultID = "";
     $.ajax({
